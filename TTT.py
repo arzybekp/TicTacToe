@@ -21,6 +21,9 @@ class TTT(object):
         for element in [self.squares[i:i + 3] for i in range(0, len(self.squares), 3)]:
             print element
             
+    def board_string(self):
+        return list(self.squares)
+            
     def available_moves(self):
         return [k for k, v in enumerate(self.squares) if v is None]
         
@@ -51,25 +54,43 @@ class TTT(object):
 t = TTT()
 m = Minimax()
 
+#while not t.complete():
+#    move = m.minimax(t,'X')
+#    t.make_move(move,'X')
+#    t.print_board()
+#    print
+#    move = raw_input('please choose a move: ')
+#    t.make_move(int(move),'O')
+#    
+#t = TTT()
+#while not t.complete():
+#    t.print_board()
+#    print
+#    move = raw_input('please choose a move: ')
+#    t.make_move(int(move),'X')
+#    move = m.minimax(t,'O')
+#    t.make_move(move,'O')
+#    t.print_board()
+#    print
+first= 'O'
+history = []
 while not t.complete():
-    move = m.minimax(t,'X')
-    t.make_move(move,'X')
-    t.print_board()
-    print
-    move = raw_input('please choose a move: ')
-    t.make_move(int(move),'O')
+    first = t.switch_player(first)
+    current = [first]
+    current.append(t.board_string())
     
-t = TTT()
-while not t.complete():
     t.print_board()
     print
-    move = raw_input('please choose a move: ')
-    t.make_move(int(move),'X')
-    move = m.minimax(t,'O')
-    t.make_move(move,'O')
-    t.print_board()
-    print
+    
+    move = m.minimax(t,first)
+    current.append(move)
+    t.make_move(move,first)
+    
+    history.append(current)
 
+for i in history:
+    print sorted(i)
+    print
     
     
             
