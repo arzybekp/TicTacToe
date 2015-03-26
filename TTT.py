@@ -5,7 +5,6 @@ Created on Sat Mar 21 00:04:05 2015
 @author: russelljadams
 """
 import itertools
-from minimax import Minimax
 
 class TTT(object):
     winning_combos = (
@@ -16,6 +15,7 @@ class TTT(object):
     def __init__(self,squares=[]):
         if len(squares) == 0: self.squares = [None for i in range(9)]
         else: self.squares = squares
+        self.player = 'X'
     
     def print_board(self):
         for element in [self.squares[i:i + 3] for i in range(0, len(self.squares), 3)]:
@@ -30,8 +30,8 @@ class TTT(object):
     def get_squares(self,player):
         return [k for k, v in enumerate(self.squares) if v == player]
         
-    def make_move(self, square, marker):
-        self.squares[square] = marker
+    def make_move(self, square):
+        self.squares[square] = self.player
         
     def winner(self):
         x = [i for i,k in enumerate(self.squares) if k == 'X']
@@ -47,51 +47,9 @@ class TTT(object):
         if self.winner(): return True
         return False
         
-    def switch_player(self,player):
-        if player == 'X': return 'O'
-        return 'X'
-    
-t = TTT()
-m = Minimax()
-
-#while not t.complete():
-#    move = m.minimax(t,'X')
-#    t.make_move(move,'X')
-#    t.print_board()
-#    print
-#    move = raw_input('please choose a move: ')
-#    t.make_move(int(move),'O')
-#    
-#t = TTT()
-#while not t.complete():
-#    t.print_board()
-#    print
-#    move = raw_input('please choose a move: ')
-#    t.make_move(int(move),'X')
-#    move = m.minimax(t,'O')
-#    t.make_move(move,'O')
-#    t.print_board()
-#    print
-first= 'O'
-history = []
-while not t.complete():
-    first = t.switch_player(first)
-    current = [first]
-    current.append(t.board_string())
-    
-    t.print_board()
-    print
-    
-    move = m.minimax(t,first)
-    current.append(move)
-    t.make_move(move,first)
-    
-    history.append(current)
-
-for i in history:
-    print sorted(i)
-    print
-    
+    def switch_player(self):
+        if self.player == 'O': self.player = 'X'
+        else: self.player = 'O'
     
             
 
