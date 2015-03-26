@@ -170,5 +170,5 @@ def human_player(player):
         Q.update_qdict(board, successors)
     Q.save_dict()
     
-play_random(10000)
+#play_random(10000)
 #human_player('X')

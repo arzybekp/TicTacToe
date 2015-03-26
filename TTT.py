@@ -32,6 +32,12 @@ class TTT(object):
         
     def make_move(self, square):
         self.squares[square] = self.player
+
+    def set_square(self, square, player):
+        self.squares[square] = player
+        
+    def unset_square(self, square):
+        self.squares[square] = None
         
     def winner(self):
         x = [i for i,k in enumerate(self.squares) if k == 'X']
