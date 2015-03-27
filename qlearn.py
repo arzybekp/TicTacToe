@@ -169,6 +169,4 @@ def human_player(player):
         successors = Q.get_successors(current)
         Q.update_qdict(board, successors)
     Q.save_dict()
-    
-#play_random(10000)
-#human_player('X')
+

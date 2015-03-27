@@ -1,4 +1,6 @@
-class Minimax:    
+# Minimax for Tic Tac Toe
+
+class Minimax:
     def switch_player(self, player):
         if player == 'X':
             return 'O'
@@ -28,8 +30,8 @@ class Minimax:
                     test = val
                     candidate = move
             return candidate
-            
-    
+
+
     def max_value(self, game, player):
         if game.complete():
             return game.winner()
@@ -39,8 +41,8 @@ class Minimax:
             v = max([v,self.min_value(game,self.switch_player(player))])
             game.unset_square(move)
         return v
-    
-    def min_value(self, game, player):    
+
+    def min_value(self, game, player):
         if game.complete():
             return game.winner()
         v = float('inf')
